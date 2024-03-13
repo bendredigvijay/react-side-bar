@@ -1,222 +1,127 @@
-import { NavLink } from "react-router-dom";
-import { FaBars, FaHome, FaLock, FaMoneyBill, FaUser } from "react-icons/fa";
-import { MdMessage } from "react-icons/md";
-import { BiAnalyse, BiSearch } from "react-icons/bi";
-import { BiCog } from "react-icons/bi";
-import { AiFillHeart, AiTwotoneFileExclamation } from "react-icons/ai";
-import { BsCartCheck } from "react-icons/bs";
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import SidebarMenu from "./SidebarMenu";
+import React, { useState } from 'react';  
+import { NavLink, useNavigate } from 'react-router-dom';    
+import { FaHome } from 'react-icons/fa';  
+import { AnimatePresence, motion } from 'framer-motion';  
+import { RiLogoutBoxRLine } from "react-icons/ri";  
+import SidebarMenu from './SidebarMenu';  
+import logoImage from '../../assets/images/Sidebar/logossh-removebg-preview (1).png'; 
+
 const routes = [
   {
-    path: "/",
-    name: "Dashboard",
-    icon: <FaHome />,
-  },
-  {
-    path: "/users",
-    name: "Users",
-    icon: <FaUser />,
-  },
-  {
-    path: "/messages",
-    name: "Messages",
-    icon: <MdMessage />,
-  },
-  {
-    path: "/analytics",
-    name: "Analytics",
-    icon: <BiAnalyse />,
-  },
-  {
-    path: "/file-manager",
-    name: "File Manager",
-    icon: <AiTwotoneFileExclamation />,
-    subRoutes: [
-      {
-        path: "/settings/profile",
-        name: "Profile ",
-        icon: <FaUser />,
-      },
-      {
-        path: "/settings/2fa",
-        name: "2FA",
-        icon: <FaLock />,
-      },
-      {
-        path: "/settings/billing",
-        name: "Billing",
-        icon: <FaMoneyBill />,
-      },
-    ],
-  },
-  {
-    path: "/order",
-    name: "Order",
-    icon: <BsCartCheck />,
-  },
-  {
-    path: "/settings",
-    name: "Settings",
-    icon: <BiCog />,
-    exact: true,
-    subRoutes: [
-      {
-        path: "/settings/profile",
-        name: "Profile ",
-        icon: <FaUser />,
-      },
-      {
-        path: "/settings/2fa",
-        name: "2FA",
-        icon: <FaLock />,
-      },
-      {
-        path: "/settings/billing",
-        name: "Billing",
-        icon: <FaMoneyBill />,
-      },
-    ],
-  },
-  {
-    path: "/saved",
-    name: "Saved",
-    icon: <AiFillHeart />,
-  },
+    path: '/',  
+    name: 'Dashboard',  
+    icon: <FaHome />, 
+  }
 ];
 
 const SideBar = ({ children }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
-  const inputAnimation = {
-    hidden: {
-      width: 0,
-      padding: 0,
-      transition: {
-        duration: 0.2,
-      },
-    },
-    show: {
-      width: "140px",
-      padding: "5px 15px",
-      transition: {
-        duration: 0.2,
-      },
-    },
+  const [isOpen, setIsOpen] = useState(true);
+  const navigate = useNavigate(); 
+
+  const handleLogout = () => {
+    // Display a confirmation dialog
+    const isConfirmed = window.confirm('Are you sure you want to log out?');
+    localStorage.removeItem('token');
+
+    if (isConfirmed) {
+      console.log('Clicked Logout');
+      navigate('/login'); 
+    }
   };
 
-  const showAnimation = {
-    hidden: {
-      width: 0,
-      opacity: 0,
-      transition: {
-        duration: 0.5,
-      },
-    },
-    show: {
-      opacity: 1,
-      width: "auto",
-      transition: {
-        duration: 0.5,
-      },
-    },
+
+
+  const logoVariants = {
+    hidden: { opacity: 0, x: -50 },
+    show: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: -50 },
   };
 
   return (
-    <>
-      <div className="main-container">
-        <motion.div
-          animate={{
-            width: isOpen ? "200px" : "45px",
+    <div style={{ width: '163px' }} >
+      <motion.div
+        animate={{
+          transition: {
+            duration: 0.5,
+            type: 'spring',
+            damping: 10,
+          },
+        }}
+        className={`sidebar`}
+      >
+        <div className="top_section">
+          <AnimatePresence>
+            {isOpen && (
+              <motion.img
+                variants={logoVariants}
+                initial="hidden"
+                animate="show"
+                exit="hidden"
+                src={logoImage}
+                alt="Logo"
+                className="logo-image"
+                style={{ width: '150px', height: '39px', marginTop: '5px' }}
+              />
+            )}
+          </AnimatePresence>
+        </div>
 
-            transition: {
-              duration: 0.5,
-              type: "spring",
-              damping: 10,
-            },
-          }}
-          className={`sidebar `}
-        >
-          <div className="top_section">
-            <AnimatePresence>
-              {isOpen && (
-                <motion.h1
-                  variants={showAnimation}
-                  initial="hidden"
-                  animate="show"
-                  exit="hidden"
-                  className="logo"
-                >
-                  DoSomeCoding
-                </motion.h1>
-              )}
-            </AnimatePresence>
-
-            <div className="bars">
-              <FaBars onClick={toggle} />
-            </div>
-          </div>
-          <div className="search">
-            <div className="search_icon">
-              <BiSearch />
-            </div>
-            <AnimatePresence>
-              {isOpen && (
-                <motion.input
-                  initial="hidden"
-                  animate="show"
-                  exit="hidden"
-                  variants={inputAnimation}
-                  type="text"
-                  placeholder="Search"
-                />
-              )}
-            </AnimatePresence>
-          </div>
-          <section className="routes">
-            {routes.map((route, index) => {
-              if (route.subRoutes) {
-                return (
-                  <SidebarMenu
-                    setIsOpen={setIsOpen}
-                    route={route}
-                    showAnimation={showAnimation}
-                    isOpen={isOpen}
-                  />
-                );
-              }
-
+        <section className="routes">
+          {routes.map((route, index) => {
+            if (route.subRoutes) {
               return (
-                <NavLink
-                  to={route.path}
+                <SidebarMenu
+                  setIsOpen={setIsOpen}
+                  route={route}
+                  isOpen={isOpen}
                   key={index}
-                  className="link"
-                  activeClassName="active"
-                >
-                  <div className="icon">{route.icon}</div>
-                  <AnimatePresence>
-                    {isOpen && (
-                      <motion.div
-                        variants={showAnimation}
-                        initial="hidden"
-                        animate="show"
-                        exit="hidden"
-                        className="link_text"
-                      >
-                        {route.name}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </NavLink>
+                />
               );
-            })}
-          </section>
-        </motion.div>
+            }
 
-        <main>{children}</main>
-      </div>
-    </>
+            return (
+              <NavLink
+                to={route.path}
+                key={index}
+                className="link"
+                activeClassName="active"
+              >
+                <div className="icon">{route.icon}</div>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      variants={logoVariants}
+                      initial="hidden"
+                      animate="show"
+                      exit="hidden"
+                      className="link_text"
+                    >
+                      {route.name}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </NavLink>
+            );
+          })}
+        </section>
+
+        {/* Logout button */}
+        <div
+          className="logout-button"
+          style={{ position: 'absolute', bottom: '10px', width: '98%' }}
+        >
+          {isOpen && (
+            <button
+              onClick={handleLogout}
+            >
+             <RiLogoutBoxRLine />
+            </button>
+          )}
+        </div>
+      </motion.div>
+
+      <main>{children}</main>
+    </div>
   );
 };
 

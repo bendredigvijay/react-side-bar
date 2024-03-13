@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;1,400&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(32, 31, 31);
+  color: #fff;
+  font-family: 'Kanit', sans-serif;}
+
+.container {
+ display: flex;
+ 
+}
+
+/* Navbar styles */
+.navbar {
+  display: flex;
+  background-color: #161616;
+  margin-left: 1vw;
+  padding: 0.5vw;
+  margin-right: -2vw;
+  margin-top: 1rem;
+  box-shadow: 0px 2px 5px rgba(233, 233, 233, 0.2);
+  border-radius: 1vw;
+  
+}
+
+.navbar-left,
+.dashboard-title {
+  flex: 1;
+}
+
+.dashboard-title {
+  font-size: 1.8rem;
+  margin-right: 20rem;
+}
+
+
+.user-icon {
+  margin-left: -2rem; 
+  font-size: 1.5rem;
+
+}
+
+.alarm-icon {
+  margin-left: -4rem; 
+  font-size: 1.5rem;
+}
+
+
+/* Navbar1 styles */
+.navbar1 {
+  margin-top: 1rem;
+  display: flex;
+  background-color: hsl(0, 0%, 9%);
+  margin-left: 4vw;
+  padding: 1.8vw;
+  margin-right: 0.1vw;
+  box-shadow: 0px 2px 5px rgba(226, 225, 225, 0.2);
+  position: relative;
+  border-radius: 1vw;
+  margin-bottom: 1rem;
+}
+
+
+.leftSection {
+  display: flex;
+  align-items: center;
+}
+
+/* Dropdown styles */
+.dropdown-container {
+  position: relative;
+  margin-right: 1rem;
+}
+
+.dropdownContent {
+  display: flex;
+  margin-top: 2px;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 103rem;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 2rem;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+}
+
+
+.saveButton {
+  background-color: #e46b08;
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.5rem 2rem;
+  cursor: pointer;
+  margin-left: 46vw;
+  font-size: 1rem;
+  transition: background-color 0.3s ease; 
+}
+
+.saveButton:hover {
+  background-color:  rgb(49, 49, 48); 
+}
+
+/* Styles for the card container */
+.navbar2 {
+  width: 82vw; 
+  background-color: #161616;
+  padding: 1.3vw ;
+  margin-left: 4.0vw;
+  box-shadow: 0px 2px 5px rgba(255, 255, 255, 0.2);
+  border-radius: 1vw;
+
+}
+
+/* Styles for the individual card */
+.card {
+  margin-top: 1rem;
+  border: 1px solid #a89f9f;
+  border-radius: 1rem;
+  padding: 0.6vw; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 59.8vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  position: relative;
+  margin-bottom: 1.3vw;
+  margin-left: 9vw;
+
+}
+
+.card p {
+  color: #adaaaa;
+  margin-right: 1vw; 
+  text-align: right;
+  margin-top: 1.27vw; 
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card h1, .card h3 {
+  color: #ebe9e9;
+  text-align: center;
+}
+
+/* Styles for each section */
+.section {
+  text-align: start;
+}
+
+.card h1 {
+  position: absolute;
+  font-size: large;
+  top: 0;
+  left: 0;
+  width: 59.6vw;
+  background-color: #6e6b6b;
+  border-radius: 4rem;
+  margin: 10;
+}
+.date{
+  position: relative;
+  left: 23vw;
+  font-size: small;;
+}
+.card:hover {
+  background-color: #292828; 
+  transform: scale(1.00); 
+  transition: background-color 0.4s ease, transform 0.5s ease; 
+}
+
+.pre2 {
+  position: absolute;
+  top: 7vw; 
+  left: 8rem;
+  transform: translateX(-50%);
+  border-radius: 4rem;
+  font-size: 1rem;
+  color: rgb(248, 248, 248);
+}
+.pre3{
+  position: absolute;
+  top: -1.8vw;
+  left: 29vw;
+  margin-bottom: 1vw;
+  transform: translateX(-50%);
+  border-radius: 4rem;
+  font-size: 0.9rem;
+  color: rgb(248, 248, 248);
+}
+.pre1 {
+  position: absolute;
+  top: 1.9vw; 
+  left: 8rem;
+  transform: translateX(-50%);
+  border-radius: 4rem;
+  padding: 4rem;
+  font-size: 1vm;
+  color: rgb(248, 248, 248);
+}
+
+.react-calendar {
+  position: absolute;
+  top: calc(85% + 1px); 
+  left: 12rem;
+  z-index: 99; 
+  border: 1px solid #ccc; 
+}
+
+.custom-button {
+  padding: 0.1rem 1.5rem;
+  background-color: rgb(241, 117, 0);
+  color: rgb(243, 243, 243);
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  height: 2.65rem;
+  width: 8rem;
+  transition: background-color 0.3s ease; 
+}
+
+.custom-button:hover {
+  background-color: rgb(49, 49, 48);
+}
+
+
+@keyframes flowAnimation {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 100%;
+  }
+}
+
+.flow-animation {
+  stroke-dasharray: 5%;
+  stroke-dashoffset: 10%;
+  animation: flowAnimation 7s linear infinite;
+}
+
